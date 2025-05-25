@@ -1,0 +1,1 @@
+flwr[dashboard]==1.8.0

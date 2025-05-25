@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  server:
+    build: ./server
+    container_name: flwr_server
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - flnet
+
+  client_pt:
+    build: ./client_pt
+    container_name: client_pytorch
+    depends_on:
+      - server
+    networks:
+      - flnet
+
+  client_tf:
+    build: ./client_tf
+    container_name: client_tensorflow
+    depends_on:
+      - server
+    networks:
+      - flnet
+
+networks:
+  flnet:
+    driver: bridge
